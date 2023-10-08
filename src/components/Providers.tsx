@@ -23,3 +23,4 @@ const Providers = ({children}:{children: React.ReactNode}) => {
         </trpc.Provider>
     )
 }
+export default Providers;
