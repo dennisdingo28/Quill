@@ -27,6 +27,22 @@ export const appRouter = router({
     }
     return {success:true};
   }),
+  getFile: privateProcedure.input(z.object({key:z.string()})).mutation(async ({ctx, input})=>{
+    const {userId} = ctx;
+
+    const file = await prismadb.file.findFirst({
+      where:{
+        userId:userId,
+        key:input.key,
+      },
+    });
+
+    if(!file)
+      throw new TRPCError({code:"NOT_FOUND"});
+
+      
+    return file;
+  }),
   getUserFiles: privateProcedure.query(async ({ctx})=>{
     const {userId, user} = ctx;
     return await prismadb.file.findMany({
