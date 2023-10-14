@@ -1,4 +1,4 @@
-import ChatWrapper from "@/components/ChatWrapper";
+import ChatWrapper from "@/components/Chat/ChatWrapper";
 import PdfRenderer from "@/components/PdfRenderer";
 import prismadb from "@/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
@@ -38,7 +38,7 @@ const Page = async ({params}:PageProps) => {
                 </div>
                 
                 <div className="shrink-0 flex-[0.75] border-t border-gray-200 lg:w-96 lg:border-l lg:border-t-o">
-                    <ChatWrapper/>
+                    <ChatWrapper fileId={file.id}/>
                 </div>
             </div>
         </div>

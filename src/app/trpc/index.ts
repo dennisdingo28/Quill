@@ -71,6 +71,20 @@ export const appRouter = router({
 
     return file;
   }),
+
+  getFileUploadStatus: privateProcedure.input(z.object({fileId: z.string()})).query(async ({input,ctx}) =>{
+    const {userId} = ctx;
+    const file = await prismadb.file.findFirst({
+      where:{
+        id:input.fileId,
+        userId: userId,
+      }
+    });
+    
+    if(!file) return {status:"PENDING" as const};
+
+    return {status:file.uploadStatus};
+  }),
 });
  
 
